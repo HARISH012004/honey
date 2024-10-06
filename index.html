@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/styles.css"> <!-- Optional CSS File -->
+</head>
+<body>
+    <h1>Login</h1>
+    <form id="login-form">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <button type="submit">Login</button>
+    </form>
+    <p id="error" style="color:red;"></p>
+    <a href="create_account.html">Create a new account</a>
+
+    <script>
+        // Simulated database using localStorage
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const user = users.find(u => u.username === username && u.password === password);
+
+            if (user) {
+                localStorage.setItem('loggedInUser', username);
+                window.location.href = 'dashboard.html';
+            } else {
+                document.getElementById('error').innerText = "Invalid username or password.";
+            }
+        });
+    </script>
+</body>
+</html>

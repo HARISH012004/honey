@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css"> <!-- Optional CSS File -->
+</head>
+<body>
+    <h1>Welcome to your Dashboard</h1>
+    <p><strong>User:</strong> <span id="user"></span></p>
+    <iframe id="esp32-cam" width="560" height="315" src="http://192.168.243.232" frameborder="0" allowfullscreen></iframe><br><br>
+
+    <button onclick="logout()">Logout</button>
+
+    <script>
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        if (!loggedInUser) {
+            window.location.href = 'index.html';
+        } else {
+            document.getElementById('user').innerText = loggedInUser;
+        }
+
+        function logout() {
+            localStorage.removeItem('loggedInUser');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
